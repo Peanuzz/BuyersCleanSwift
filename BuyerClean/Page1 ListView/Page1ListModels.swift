@@ -31,7 +31,11 @@ enum Page1Model{
     struct Sort {
         struct Request
         {
-            var sortCase: Int
+            enum sortCase {
+                case lowToHight
+                case hightToLow
+                case raing
+            }
         }
         struct Response
         {

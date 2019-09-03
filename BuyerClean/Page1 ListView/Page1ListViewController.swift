@@ -21,11 +21,10 @@ protocol Page1ListViewControllerInterface: class
     func passSelected()
 }
 
-class Page1ListViewController: UIViewController, Page1ListViewControllerInterface
-{
-  var interactor: Page1ListInteractor!
-  var router: Page1ListRouter!
-  var displayedPhones: [DisplayedPhone] = []
+class Page1ListViewController: UIViewController, Page1ListViewControllerInterface {
+    var interactor: Page1ListInteractor!
+    var router: Page1ListRouter!
+    var displayedPhones: [DisplayedPhone] = []
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -81,9 +80,8 @@ class Page1ListViewController: UIViewController, Page1ListViewControllerInterfac
         tableView.reloadData()
     }
     
-    private func sort(_ sortCase: Int) {
-        let sort = Page1Model.Sort.Request(sortCase: sortCase)
-        self.interactor.sortPhone(request: sort)
+    private func sort(_ sortCase: Page1Model.Sort.Request.sortCase) {
+        self.interactor.sortPhone(request: sortCase)
         self.tableView.reloadData()
     }
     
@@ -92,13 +90,13 @@ class Page1ListViewController: UIViewController, Page1ListViewControllerInterfac
                                       message: "",
                                       preferredStyle: .alert)
          let sortLowtoHight = UIAlertAction(title: "Price low to Hight", style: .default) { (action) -> Void in
-            self.sort(1)
+            self.sort(Page1Model.Sort.Request.sortCase.lowToHight)
         }
         let sortHighttoLow = UIAlertAction(title: "Price hight to low", style: .default) { (action) -> Void in
-            self.sort(2)
+            self.sort(Page1Model.Sort.Request.sortCase.hightToLow)
         }
         let sortRating = UIAlertAction(title: "Rating", style: .default) { (action) -> Void in
-            self.sort(3)
+            self.sort(Page1Model.Sort.Request.sortCase.raing)
         }
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
         
@@ -127,10 +125,12 @@ extension Page1ListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Page1TableViewCell
-        let product: DisplayedPhone = displayedPhones[indexPath.item]
-        cell.setCell(phone: product)
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? Page1TableViewCell {
+            let product: DisplayedPhone = displayedPhones[indexPath.item]
+            cell.setCell(phone: product)
+            return cell
+        }
+        return UITableViewCell()
     }
 }
 

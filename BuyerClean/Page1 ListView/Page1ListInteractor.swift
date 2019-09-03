@@ -17,7 +17,7 @@ import SwiftyJSON
 protocol Page1ListViewInteractor
 {
     func feedAPI(request:Page1Model.GetAPI.Request)
-    func sortPhone(request:Page1Model.Sort.Request)
+    func sortPhone(request:Page1Model.Sort.Request.sortCase)
     func selectedPhone(request:Page1Model.Selected.Request)
 }
 
@@ -56,19 +56,17 @@ class Page1ListInteractor: Page1ListViewInteractor{
         self.phons = sort
     }
     
-    func sortPhone(request: Page1Model.Sort.Request) {
-        switch request.sortCase {
-        case 1:
+    func sortPhone(request: Page1Model.Sort.Request.sortCase) {
+        switch request{
+        case .lowToHight:
             let sort  = phons.sorted(by: { $0.price < $1.price })
             sortSet(sort)
-        case 2:
+        case .hightToLow:
             let sort = phons.sorted(by: { $0.price > $1.price })
             sortSet(sort)
-        case 3:
+        case .raing:
             let sort = phons.sorted(by: { $0.rating > $1.rating })
             sortSet(sort)
-        default:
-            break
         }
     }
 }
