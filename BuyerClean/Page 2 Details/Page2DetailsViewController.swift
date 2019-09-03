@@ -15,12 +15,16 @@ import UIKit
 protocol Page2DetailsViewControllerInterface: class
 {
     func displayPhone(viewModel: Page2Model.showDetails.ViewModel)
+    func displayImage(viewModel: Page2Model.GetAPIImage.ViewModel)
 }
 
 class Page2DetailsViewController: UIViewController, Page2DetailsViewControllerInterface
 {
+    
     var interactor: Page2DetailsInteractorInterface!
     var router: Page2DetailsRouter!
+    var phone : Phone!
+    var displayedImage: [DisplayedImage] = []
     
     @IBOutlet weak var mCollectionView:UICollectionView!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -70,11 +74,51 @@ class Page2DetailsViewController: UIViewController, Page2DetailsViewControllerIn
   
   func displayPhone(viewModel: Page2Model.showDetails.ViewModel)
   {
-    let phone = viewModel.json
+    phone = viewModel.json
     
     print("phone: \(phone)")
-//    descriptionLabel.text = viewModel.
-//    priceLabel.text = "Price: $\(viewModel.price)"
-//    rateLabel.text = "Rating: \(viewModel.rating)"
+    descriptionLabel.text = phone?.description
+    priceLabel.text = "Price: $\(phone!.price)"
+    rateLabel.text = "Rating: \(phone!.rating)"
+    let id = Page2Model.GetAPIImage.Request(id: phone.id)
+    self.interactor.feedAPI(request: id)
   }
+    
+    func displayImage(viewModel: Page2Model.GetAPIImage.ViewModel) {
+        if viewModel.success{
+            displayedImage = viewModel.json
+            mCollectionView.reloadData()
+        }else{
+            createAlert(title: "Error", message: "Can not reload image")
+        }
+    }
+    
+    func createAlert(title:String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension Page2DetailsViewController:UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return displayedImage.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! Page2ImageCollectionViewCell
+        let item = displayedImage[indexPath.row]
+        let url = item.url
+        if url.contains("http"){
+            cell.mImage.kf.setImage(with: URL(string: url))
+        } else {
+            cell.mImage.kf.setImage(with: URL(string: "http://\(url)"))
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = collectionView.frame.size
+        return CGSize(width: size.width, height: size.height)
+    }
+    
 }

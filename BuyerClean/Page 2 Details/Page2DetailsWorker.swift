@@ -11,10 +11,31 @@
 //
 
 import UIKit
+import Alamofire
 
-class Page2DetailsWorker
-{
-  func doSomeWork()
-  {
-  }
+protocol APIManagerImageProtocol {
+    func getImageAPI(id:Int, completion: @escaping (Swift.Result<[ImagePhone], Error>) -> Void)
+}
+
+class APIManagerImage : APIManagerImageProtocol {
+      static let shared: APIManagerImage = APIManagerImage()
+    
+    func getImageAPI(id:Int, completion: @escaping (Result<[ImagePhone], Error>) -> Void) {
+        let baseURL = "https://scb-test-mobile.herokuapp.com/api/mobiles/\(id)/images/"
+        AF.request(baseURL)
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    do {
+                        let imgPhone = try JSONDecoder().decode([ImagePhone].self, from: response.data!)
+                        completion(.success(imgPhone))
+                    } catch (let error) {
+                        completion(.failure(error))
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+        }
+    }
 }

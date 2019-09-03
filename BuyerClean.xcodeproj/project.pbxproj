@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		64AC918E5FA390B8360C2454 /* Pods_BuyerClean.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C16CF838AF0985DC5A9601 /* Pods_BuyerClean.framework */; };
 		662AA2C4231CCA4E0093A5A8 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662AA2C3231CCA4E0093A5A8 /* Models.swift */; };
+		662E3B5D231E20AF00E1E8D1 /* Page2ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662E3B5C231E20AF00E1E8D1 /* Page2ImageCollectionViewCell.swift */; };
 		66ACE444231AC95800104A09 /* Page1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ACE443231AC95800104A09 /* Page1TableViewCell.swift */; };
 		66B050722318F6B800FABC73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B050712318F6B800FABC73 /* AppDelegate.swift */; };
 		66B050742318F6B800FABC73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B050732318F6B800FABC73 /* ViewController.swift */; };
@@ -33,6 +34,7 @@
 		02C0B9F91B9047E26CA12F58 /* Pods-BuyerClean.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuyerClean.release.xcconfig"; path = "Target Support Files/Pods-BuyerClean/Pods-BuyerClean.release.xcconfig"; sourceTree = "<group>"; };
 		51839C2CC7D3B0B170D65AED /* Pods-BuyerClean.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuyerClean.debug.xcconfig"; path = "Target Support Files/Pods-BuyerClean/Pods-BuyerClean.debug.xcconfig"; sourceTree = "<group>"; };
 		662AA2C3231CCA4E0093A5A8 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		662E3B5C231E20AF00E1E8D1 /* Page2ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page2ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		66ACE443231AC95800104A09 /* Page1TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page1TableViewCell.swift; sourceTree = "<group>"; };
 		66B0506E2318F6B800FABC73 /* BuyerClean.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuyerClean.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B050712318F6B800FABC73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				66B050942318F8EE00FABC73 /* Page2DetailsModels.swift */,
 				66B050952318F8EE00FABC73 /* Page2DetailsViewController.swift */,
 				66B050962318F8EE00FABC73 /* Page2DetailsInteractor.swift */,
+				662E3B5C231E20AF00E1E8D1 /* Page2ImageCollectionViewCell.swift */,
 			);
 			path = "Page 2 Details";
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				662E3B5D231E20AF00E1E8D1 /* Page2ImageCollectionViewCell.swift in Sources */,
 				66ACE444231AC95800104A09 /* Page1TableViewCell.swift in Sources */,
 				66B0508F2318F8D600FABC73 /* Page1ListViewController.swift in Sources */,
 				66B050902318F8D600FABC73 /* Page1ListInteractor.swift in Sources */,

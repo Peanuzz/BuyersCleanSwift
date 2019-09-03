@@ -15,9 +15,7 @@ import SwiftyJSON
 
 enum Page1Model{
   struct GetAPI{
-    struct Request : Codable
-    {
-    }
+    struct Request : Codable{}
     struct Response
     {
         var success: Bool
@@ -42,6 +40,21 @@ enum Page1Model{
         struct ViewModel
         {
             var array: Array<DisplayedPhone>
+        }
+    }
+    
+    struct Selected {
+        struct Request
+        {
+            var indexPath: Int
+        }
+        struct Response
+        {
+            
+        }
+        struct ViewModel
+        {
+            
         }
     }
 }

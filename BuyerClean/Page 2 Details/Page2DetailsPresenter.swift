@@ -15,6 +15,7 @@ import UIKit
 protocol Page2DetailsPresenterInterface
 {
   func presentDeatails(response: Page2Model.showDetails.Response)
+    func presentImage(response: Page2Model.GetAPIImage.Response)
 }
 
 class Page2DetailsPresenter: Page2DetailsPresenterInterface
@@ -25,12 +26,17 @@ class Page2DetailsPresenter: Page2DetailsPresenterInterface
   
   func presentDeatails(response: Page2Model.showDetails.Response)
   {
-//    let displayed: [Page2Model.DisplayedPhone] = response.json.map() { phone in
-//        Page2Model.DisplayedPhone(rating: phone.rating, thumbImageURL: phone.thumbImageURL, price: phone.price, name: phone.name, description: phone.description)
-//    }
-    let viewModel =  Page2Model.showDetails.ViewModel(mobileID: response.mobileID, json: response.json)
+    let viewModel =  Page2Model.showDetails.ViewModel(json: response.json)
     print("viewmodel : \(viewModel)")
     viewController?.displayPhone(viewModel: viewModel)
   }
+    
+    func presentImage(response: Page2Model.GetAPIImage.Response) {
+        let displayedsImage: [DisplayedImage] = response.json.map() { phone in
+            DisplayedImage(url: phone.url)
+        }
+        let viewModel = Page2Model.GetAPIImage.ViewModel(success: true, json: displayedsImage)
+        viewController?.displayImage(viewModel: viewModel)
+    }
 }
 

@@ -15,24 +15,30 @@ import UIKit
 enum Page2Model
 {
   struct showDetails{
-    struct Request
-    {
-    }
+    struct Request{}
     struct Response
     {
-        var mobileID: Int
-//        var price:Double
-//        var rating:Double
-//        var description:String
-        var json: Array<DisplayedPhone>
+        var json: Phone
     }
     struct ViewModel
     {
-        var mobileID: Int
-//        var price:Double
-//        var rating:Double
-//        var description:String
-        var json: Array<DisplayedPhone>
+        var json: Phone
     }
   }
+    
+    struct GetAPIImage{
+        struct Request {
+            let id: Int
+        }
+        struct Response
+        {
+            var success: Bool
+            var json: Array<ImagePhone>
+        }
+        struct ViewModel
+        {
+            var success: Bool
+            var json : Array<DisplayedImage>
+        }
+    }
 }

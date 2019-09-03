@@ -32,7 +32,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="6rh-dZ-0ZX" customClass="ImageCollectionViewCell" customModule="BuyerClean" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="6rh-dZ-0ZX" customClass="Page2ImageCollectionViewCell" customModule="BuyerClean" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.5" width="356" height="174"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -59,6 +59,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="mLj-qZ-gbk" id="4Ee-CA-mQQ"/>
+                                    <outlet property="delegate" destination="mLj-qZ-gbk" id="3ja-YH-uOJ"/>
+                                </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.85000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tI-9k-1ZV">
                                 <rect key="frame" x="29" y="303" width="356" height="20.5"/>
@@ -112,6 +116,7 @@
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="8tI-9k-1ZV" id="zOZ-xf-rcI"/>
+                        <outlet property="mCollectionView" destination="95Y-Mm-x48" id="ofX-5D-Y2Y"/>
                         <outlet property="priceLabel" destination="Y1f-Nc-Q8G" id="kah-40-Ekw"/>
                         <outlet property="rateLabel" destination="yke-Pb-Vxh" id="EVV-xP-O4g"/>
                     </connections>

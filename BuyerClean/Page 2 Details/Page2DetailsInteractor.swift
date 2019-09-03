@@ -14,37 +14,37 @@ import UIKit
 
 protocol Page2DetailsInteractorInterface
 {
-  func showDetails(request: Page2Model.showDetails.Request)
-    var phone: DisplayedPhone? {get set}
-    var mobileID:Int? {get set}
-    var price:Double? {get set}
-    var rating:Double? {get set}
-    var description:String? {get set}
+    func feedAPI(request:Page2Model.GetAPIImage.Request)
+    func showDetails(request: Page2Model.showDetails.Request)
+    var phone: Phone? {get set}
+
 }
 
 class Page2DetailsInteractor: Page2DetailsInteractorInterface
 {
-    var description: String?
-    var price: Double?
-    var rating: Double?
-    var phone: DisplayedPhone?
-    var mobileID: Int?
-    
-    
-  var presenter: Page2DetailsPresenterInterface?
-  var worker: Page2DetailsWorker?
+    var phone: Phone?
+    var imagePhone: [ImagePhone] = []
+    var presenter: Page2DetailsPresenterInterface?
+    var worker: APIManagerImage?
   
   // MARK: Do something
   
-  func showDetails(request: Page2Model.showDetails.Request)
-  {
-    let phoneDetails : DisplayedPhone = self.phone!
-    let mobileID = self.mobileID!
-//    let description = self.description!
-//    let price = self.price!
-//    let rating = self.rating!
-    
-    let response = Page2Model.showDetails.Response(mobileID: mobileID, json: [phoneDetails])
+  func showDetails(request: Page2Model.showDetails.Request){
+    let response = Page2Model.showDetails.Response(json: phone!)
     presenter?.presentDeatails(response: response)
   }
+    
+    func feedAPI(request:Page2Model.GetAPIImage.Request){
+        APIManagerImage.shared.getImageAPI(id: request.id) { [weak self] result in
+            switch result {
+            case .success(let imgPhone):
+                self?.imagePhone = imgPhone
+                let response = Page2Model.GetAPIImage.Response(success: true, json: imgPhone)
+                self?.presenter?.presentImage(response: response)
+            case .failure(let error):
+                let response = Page2Model.GetAPIImage.Response(success: false, json: error as! Array<ImagePhone>)
+                self?.presenter?.presentImage(response: response)
+            }
+        }
+    }
 }

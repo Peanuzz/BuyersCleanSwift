@@ -16,17 +16,25 @@ import SwiftyJSON
 
 protocol Page1ListViewInteractor
 {
-  func feedAPI(request:Page1Model.GetAPI.Request)
-  func sortPhone(request:Page1Model.Sort.Request)
+    func feedAPI(request:Page1Model.GetAPI.Request)
+    func sortPhone(request:Page1Model.Sort.Request)
+    func selectedPhone(request:Page1Model.Selected.Request)
 }
 
 class Page1ListInteractor: Page1ListViewInteractor{
- 
     var presenter: Page1ListPresenterInterface!
     var worker: APIManagerProtocol!
     var phons: [Phone] = []
-  
+    var selectedPhone: Phone!
   // MARK: Do something
+    
+    func selectedPhone(request: Page1Model.Selected.Request) {
+        let index = request.indexPath
+        let selectedPhone : Phone = phons[index]
+        self.selectedPhone = selectedPhone
+        print("index : \(index)")
+        print("selectedPhone : \(selectedPhone)")
+    }
     
     func sortPhone(request: Page1Model.Sort.Request) {
         switch request.sortCase {
@@ -59,6 +67,5 @@ class Page1ListInteractor: Page1ListViewInteractor{
                 self?.presenter.presentPage1(response: response)
             }
         }
-     
   }
 }

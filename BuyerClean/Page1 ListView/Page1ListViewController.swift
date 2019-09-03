@@ -67,7 +67,6 @@ class Page1ListViewController: UIViewController, Page1ListViewControllerInterfac
     if viewModel.success{
         displayedPhones = viewModel.json
         tableView.reloadData()
-        print("Page1 Phone: \(displayedPhones)")
     }else{
         createAlert(title: "Error", message: "Can not reload data")
     }
@@ -112,8 +111,11 @@ class Page1ListViewController: UIViewController, Page1ListViewControllerInterfac
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let page2 : [DisplayedPhone] = displayedPhones
-        router.passDataToPage2Details(displayPhone: page2, segue: segue)
+        let indexPath = self.tableView.indexPathForSelectedRow
+        let index = Page1Model.Selected.Request(indexPath: indexPath!.row)
+        self.interactor.selectedPhone(request: index)
+        print("index \(index)")
+        router.passDataToPage2Details(segue: segue)
     }
 }
 

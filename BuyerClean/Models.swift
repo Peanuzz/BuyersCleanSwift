@@ -8,7 +8,7 @@
 
 import Foundation
 
-//typealias Model = [Phone]
+typealias Model = [Phone]
 
 struct Phone: Codable {
     let rating: Double
@@ -18,10 +18,26 @@ struct Phone: Codable {
     let brand, name, description: String
 }
 
+typealias ModelImage = [ImagePhone]
+
+struct ImagePhone: Codable {
+    let url: String
+    let id, mobileID: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case url, id
+        case mobileID = "mobile_id"
+    }
+}
+
 struct DisplayedPhone {
     let id: Int
     let rating: Double
     let thumbImageURL: String
     let price: Double
     let name, description: String
+}
+
+struct DisplayedImage {
+    let url: String
 }

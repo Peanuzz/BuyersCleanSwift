@@ -25,21 +25,11 @@ class Page1ListRouter: Page1RouterDetails{
         viewController.performSegue(withIdentifier: "showDetails", sender: nil)
     }
     
-    func passDataToPage2Details(displayPhone: [DisplayedPhone] ,segue: UIStoryboardSegue){
+    func passDataToPage2Details(segue: UIStoryboardSegue){
         if segue.identifier == "showDetails" {
             let destinationVC = segue.destination as? Page2DetailsViewController
-            let indexPath = viewController?.tableView.indexPathForSelectedRow
-            if let indexPath = indexPath {
-                let phone : DisplayedPhone = displayPhone[(indexPath as NSIndexPath).row]
-                let item: DisplayedPhone = displayPhone[indexPath.item]
-                destinationVC?.interactor.phone = item
-                print("item: \(item)")
-                print(phone)
-                destinationVC?.interactor.mobileID = item.id
-//                destinationVC?.interactor.description = item.description
-//                destinationVC?.interactor.price = item.price
-//                destinationVC?.interactor.rating = item.rating
-            }
+            let selectedPhone = viewController.interactor.selectedPhone
+            destinationVC?.interactor.phone = selectedPhone
         }
     }
 }
