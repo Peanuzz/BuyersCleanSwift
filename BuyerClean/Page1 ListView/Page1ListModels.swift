@@ -48,13 +48,7 @@ enum Page1Model{
         {
             var indexPath: Int
         }
-        struct Response
-        {
-            
-        }
-        struct ViewModel
-        {
-            
-        }
+        struct Response{}
+        struct ViewModel{}
     }
 }

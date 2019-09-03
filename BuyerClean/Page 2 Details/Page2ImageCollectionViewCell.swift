@@ -14,7 +14,6 @@ class Page2ImageCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         mImage.backgroundColor = .clear
     }
     

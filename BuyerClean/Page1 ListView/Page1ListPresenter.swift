@@ -33,10 +33,10 @@ class Page1ListPresenter: Page1ListPresenterInterface
     }
     
     func presentPage1(response: Page1Model.GetAPI.Response){
-    let displayeds: [DisplayedPhone] = response.json.map() { phone in
+        let displayeds: [DisplayedPhone] = response.json.map() { phone in
         DisplayedPhone(id: phone.id, rating: phone.rating, thumbImageURL: phone.thumbImageURL, price: phone.price, name: phone.name, description: phone.description)
     }
-    let viewModel = Page1Model.GetAPI.ViewModel(success: response.success, json: displayeds)
-    viewController?.displayPage1(viewModel: viewModel)
+        let viewModel = Page1Model.GetAPI.ViewModel(success: response.success, json: displayeds)
+        viewController?.displayPage1(viewModel: viewModel)
   }
 }

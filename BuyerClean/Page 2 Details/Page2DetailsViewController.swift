@@ -75,8 +75,6 @@ class Page2DetailsViewController: UIViewController, Page2DetailsViewControllerIn
   func displayPhone(viewModel: Page2Model.showDetails.ViewModel)
   {
     phone = viewModel.json
-    
-    print("phone: \(phone)")
     descriptionLabel.text = phone?.description
     priceLabel.text = "Price: $\(phone!.price)"
     rateLabel.text = "Rating: \(phone!.rating)"

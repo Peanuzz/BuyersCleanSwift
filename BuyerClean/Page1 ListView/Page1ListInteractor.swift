@@ -26,14 +26,27 @@ class Page1ListInteractor: Page1ListViewInteractor{
     var worker: APIManagerProtocol!
     var phons: [Phone] = []
     var selectedPhone: Phone!
+    
   // MARK: Do something
+  
+    func feedAPI(request:Page1Model.GetAPI.Request){
+        APIManager.shared.getAPI() { [weak self] result in
+            switch result {
+            case .success(let phone):
+                self?.phons = phone
+                let response = Page1Model.GetAPI.Response(success: true, json: phone)
+                self?.presenter.presentPage1(response: response)
+            case .failure(let error):
+                let response = Page1Model.GetAPI.Response(success: false, json: error as! Array<Phone>)
+                self?.presenter.presentPage1(response: response)
+            }
+        }
+    }
     
     func selectedPhone(request: Page1Model.Selected.Request) {
         let index = request.indexPath
         let selectedPhone : Phone = phons[index]
         self.selectedPhone = selectedPhone
-        print("index : \(index)")
-        print("selectedPhone : \(selectedPhone)")
     }
     
     func sortPhone(request: Page1Model.Sort.Request) {
@@ -54,18 +67,4 @@ class Page1ListInteractor: Page1ListViewInteractor{
             break
         }
     }
-  
-    func feedAPI(request:Page1Model.GetAPI.Request){
-        APIManager.shared.getAPI() { [weak self] result in
-            switch result {
-            case .success(let phone):
-                self?.phons = phone
-                let response = Page1Model.GetAPI.Response(success: true, json: phone)
-                self?.presenter.presentPage1(response: response)
-            case .failure(let error):
-                let response = Page1Model.GetAPI.Response(success: false, json: error as! Array<Phone>)
-                self?.presenter.presentPage1(response: response)
-            }
-        }
-  }
 }

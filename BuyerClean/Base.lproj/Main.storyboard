@@ -206,7 +206,6 @@
                                             <outlet property="priceLabel" destination="BNt-Yi-7xv" id="eK7-Qi-QFp"/>
                                             <outlet property="productImageView" destination="YlT-QU-Irn" id="n39-hr-G9H"/>
                                             <outlet property="ratingLabel" destination="3ND-RY-26y" id="bJ4-i2-HA1"/>
-                                            <segue destination="mLj-qZ-gbk" kind="show" identifier="showDetails" id="AOl-uk-SUw"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -224,6 +223,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="v6l-Y8-iuT" id="jFz-va-Rrl"/>
+                        <segue destination="mLj-qZ-gbk" kind="show" identifier="showDetails" id="f9K-Eg-Hic"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KnW-W9-Gz6" userLabel="First Responder" sceneMemberID="firstResponder"/>

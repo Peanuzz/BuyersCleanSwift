@@ -27,10 +27,8 @@ class Page2DetailsPresenter: Page2DetailsPresenterInterface
   func presentDeatails(response: Page2Model.showDetails.Response)
   {
     let viewModel =  Page2Model.showDetails.ViewModel(json: response.json)
-    print("viewmodel : \(viewModel)")
     viewController?.displayPhone(viewModel: viewModel)
   }
-    
     func presentImage(response: Page2Model.GetAPIImage.Response) {
         let displayedsImage: [DisplayedImage] = response.json.map() { phone in
             DisplayedImage(url: phone.url)

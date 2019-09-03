@@ -52,8 +52,6 @@ class Page1ListViewController: UIViewController, Page1ListViewControllerInterfac
     viewController.router = router
   }
   
-  // MARK: Routing
-  
   // MARK: View lifecycle
   
   override func viewDidLoad()
@@ -83,7 +81,6 @@ class Page1ListViewController: UIViewController, Page1ListViewControllerInterfac
     }
     
     @IBAction func actionSort(_ sender: Any) {
-//        var sortCase : Int
         let alert = UIAlertController(title: "Sort",
                                       message: "",
                                       preferredStyle: .alert)
@@ -110,11 +107,9 @@ class Page1ListViewController: UIViewController, Page1ListViewControllerInterfac
         present(alert, animated: true, completion: nil)
     }
     
+// MARK: Routing
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let indexPath = self.tableView.indexPathForSelectedRow
-        let index = Page1Model.Selected.Request(indexPath: indexPath!.row)
-        self.interactor.selectedPhone(request: index)
-        print("index \(index)")
         router.passDataToPage2Details(segue: segue)
     }
 }
@@ -141,5 +136,12 @@ extension Page1ListViewController: UITableViewDataSource {
 extension Page1ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let index = Page1Model.Selected.Request(indexPath: indexPath.row)
+        self.interactor.selectedPhone(request: index)
+        router.navigateToPage2()
     }
 }
