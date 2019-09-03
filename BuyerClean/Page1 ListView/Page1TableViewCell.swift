@@ -23,5 +23,13 @@ class Page1TableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    func setCell(phone: DisplayedPhone) {
+        nameLabel.text = phone.name
+        descriptionLabel.text = phone.description
+        priceLabel.text = "Price: $\(phone.price)"
+        ratingLabel.text = "Rating: \(phone.rating)"
+        productImageView.kf.setImage(with: URL(string: phone.thumbImageURL))
+    }
 
 }

@@ -219,7 +219,11 @@
                         <viewLayoutGuide key="safeArea" id="fK6-5Z-kj9"/>
                     </view>
                     <navigationItem key="navigationItem" id="uz3-Mv-Ccd">
-                        <barButtonItem key="rightBarButtonItem" title="Sort" id="I4L-6F-giH"/>
+                        <barButtonItem key="rightBarButtonItem" title="Sort" id="I4L-6F-giH">
+                            <connections>
+                                <action selector="actionSort:" destination="LNb-fu-Tbb" id="76g-Qt-07p"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="v6l-Y8-iuT" id="jFz-va-Rrl"/>

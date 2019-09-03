@@ -16,11 +16,16 @@ protocol Page1ListPresenterInterface
 {
     func presentPage1(response: Page1Model.GetAPI.Response)
     func sortPage1(response: Page1Model.Sort.Response)
+    func passSelected()
 }
 
-class Page1ListPresenter: Page1ListPresenterInterface
-{
+class Page1ListPresenter: Page1ListPresenterInterface{
+    
   weak var viewController: Page1ListViewControllerInterface!
+    
+    func passSelected() {
+        viewController.passSelected()
+    }
   
   // MARK: Do something
     

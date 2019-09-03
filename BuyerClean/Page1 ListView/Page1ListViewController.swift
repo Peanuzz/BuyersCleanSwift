@@ -18,6 +18,7 @@ protocol Page1ListViewControllerInterface: class
 {
     func displayPage1(viewModel: Page1Model.GetAPI.ViewModel)
     func sortPhonePage1(viewModel: Page1Model.Sort.ViewModel)
+    func passSelected()
 }
 
 class Page1ListViewController: UIViewController, Page1ListViewControllerInterface
@@ -80,24 +81,25 @@ class Page1ListViewController: UIViewController, Page1ListViewControllerInterfac
         tableView.reloadData()
     }
     
+    private func sort(_ sortCase: Int) {
+        let sort = Page1Model.Sort.Request(sortCase: sortCase)
+        self.interactor.sortPhone(request: sort)
+        self.tableView.reloadData()
+    }
+    
     @IBAction func actionSort(_ sender: Any) {
         let alert = UIAlertController(title: "Sort",
                                       message: "",
                                       preferredStyle: .alert)
          let sortLowtoHight = UIAlertAction(title: "Price low to Hight", style: .default) { (action) -> Void in
-            let sort = Page1Model.Sort.Request(sortCase: 1)
-            self.interactor.sortPhone(request: sort)
+            self.sort(1)
         }
-        
-        let sortHighttoLow = UIAlertAction(title: "Price hight to low", style: .default,handler: { (action) -> Void in
-            let sort = Page1Model.Sort.Request(sortCase: 2)
-            self.interactor.sortPhone(request: sort)
-        })
-        let sortRating = UIAlertAction(title: "Rating", style: .default,handler: { (action) -> Void in
-            let sort = Page1Model.Sort.Request(sortCase: 3)
-            self.interactor.sortPhone(request: sort)
-        })
-        
+        let sortHighttoLow = UIAlertAction(title: "Price hight to low", style: .default) { (action) -> Void in
+            self.sort(2)
+        }
+        let sortRating = UIAlertAction(title: "Rating", style: .default) { (action) -> Void in
+            self.sort(3)
+        }
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
         
         alert.addAction(sortLowtoHight)
@@ -109,6 +111,9 @@ class Page1ListViewController: UIViewController, Page1ListViewControllerInterfac
     
 // MARK: Routing
     
+    func passSelected(){
+        router.navigateToPage2()
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         router.passDataToPage2Details(segue: segue)
     }
@@ -124,11 +129,7 @@ extension Page1ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Page1TableViewCell
         let product: DisplayedPhone = displayedPhones[indexPath.item]
-        cell.nameLabel.text = product.name
-        cell.descriptionLabel.text = product.description
-        cell.priceLabel.text = "Price: $\(product.price)"
-        cell.ratingLabel.text = "Rating: \(product.rating)"
-        cell.productImageView.kf.setImage(with: URL(string: product.thumbImageURL))
+        cell.setCell(phone: product)
         return cell
     }
 }
@@ -142,6 +143,5 @@ extension Page1ListViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let index = Page1Model.Selected.Request(indexPath: indexPath.row)
         self.interactor.selectedPhone(request: index)
-        router.navigateToPage2()
     }
 }

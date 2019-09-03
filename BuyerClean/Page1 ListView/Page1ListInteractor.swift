@@ -47,22 +47,26 @@ class Page1ListInteractor: Page1ListViewInteractor{
         let index = request.indexPath
         let selectedPhone : Phone = phons[index]
         self.selectedPhone = selectedPhone
+        presenter.passSelected()
+    }
+    
+    private func sortSet(_ sort: [Phone]){
+        let response = Page1Model.Sort.Response(sortPhone: sort)
+        self.presenter.sortPage1(response: response)
+        self.phons = sort
     }
     
     func sortPhone(request: Page1Model.Sort.Request) {
         switch request.sortCase {
         case 1:
             let sort  = phons.sorted(by: { $0.price < $1.price })
-            let response = Page1Model.Sort.Response(sortPhone: sort)
-            self.presenter.sortPage1(response: response)
+            sortSet(sort)
         case 2:
             let sort = phons.sorted(by: { $0.price > $1.price })
-            let response = Page1Model.Sort.Response(sortPhone: sort)
-            self.presenter.sortPage1(response: response)
+            sortSet(sort)
         case 3:
             let sort = phons.sorted(by: { $0.rating > $1.rating })
-            let response = Page1Model.Sort.Response(sortPhone: sort)
-            self.presenter.sortPage1(response: response)
+            sortSet(sort)
         default:
             break
         }

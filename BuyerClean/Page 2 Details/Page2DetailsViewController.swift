@@ -55,13 +55,6 @@ class Page2DetailsViewController: UIViewController, Page2DetailsViewControllerIn
     viewController.router = router
   }
   
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    router.passDataToNextScene(segue: segue)
-  }
-  
   // MARK: View lifecycle
   
   override func viewDidLoad()
@@ -118,5 +111,4 @@ extension Page2DetailsViewController:UICollectionViewDelegateFlowLayout, UIColle
         let size = collectionView.frame.size
         return CGSize(width: size.width, height: size.height)
     }
-    
 }
