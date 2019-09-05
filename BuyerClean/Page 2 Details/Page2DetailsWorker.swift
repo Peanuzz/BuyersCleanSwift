@@ -13,13 +13,11 @@
 import UIKit
 import Alamofire
 
-protocol APIManagerImageProtocol {
+protocol Page2WokerAPIManager {
     func getImageAPI(id:Int, completion: @escaping (Swift.Result<[ImagePhone], Error>) -> Void)
 }
 
-class APIManagerImage : APIManagerImageProtocol {
-      static let shared: APIManagerImage = APIManagerImage()
-    
+class Page2WokerAPI : Page2WokerAPIManager {
     func getImageAPI(id:Int, completion: @escaping (Result<[ImagePhone], Error>) -> Void) {
         let baseURL = "https://scb-test-mobile.herokuapp.com/api/mobiles/\(id)/images/"
         AF.request(baseURL)

@@ -33,12 +33,12 @@ enum Page2Model
         struct Response
         {
             var success: Bool
-            var json: Array<ImagePhone>
+            var json: [ImagePhone]
         }
         struct ViewModel
         {
             var success: Bool
-            var json : Array<DisplayedImage>
+            var json : [ImagePhone]
         }
     }
 }

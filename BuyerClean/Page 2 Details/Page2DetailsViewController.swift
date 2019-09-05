@@ -24,7 +24,7 @@ class Page2DetailsViewController: UIViewController, Page2DetailsViewControllerIn
     var interactor: Page2DetailsInteractorInterface!
     var router: Page2DetailsRouter!
     var phone : Phone!
-    var displayedImage: [DisplayedImage] = []
+    var displayedImage: [ImagePhone] = []
     
     @IBOutlet weak var mCollectionView:UICollectionView!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -51,6 +51,8 @@ class Page2DetailsViewController: UIViewController, Page2DetailsViewControllerIn
     let interactor = Page2DetailsInteractor()
     interactor.presenter = presenter
     
+    interactor.worker = Page2WokerAPI()
+    
     viewController.interactor = interactor
     viewController.router = router
   }
@@ -72,7 +74,7 @@ class Page2DetailsViewController: UIViewController, Page2DetailsViewControllerIn
     priceLabel.text = "Price: $\(phone!.price)"
     rateLabel.text = "Rating: \(phone!.rating)"
     let id = Page2Model.GetAPIImage.Request(id: phone.id)
-    self.interactor.feedAPI(request: id)
+    self.interactor.feedAPIImage(request: id)
   }
     
     func displayImage(viewModel: Page2Model.GetAPIImage.ViewModel) {

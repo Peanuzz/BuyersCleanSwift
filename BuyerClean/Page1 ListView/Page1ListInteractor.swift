@@ -23,30 +23,29 @@ protocol Page1ListViewInteractor
 
 class Page1ListInteractor: Page1ListViewInteractor{
     var presenter: Page1ListPresenterInterface!
-    var worker: APIManagerProtocol!
+    var worker: Page1WokerAPIManager!
     var phons: [Phone] = []
-    var selectedPhone: Phone!
+    var selectedPhones: Phone!
     
   // MARK: Do something
   
     func feedAPI(request:Page1Model.GetAPI.Request){
-        APIManager.shared.getAPI() { [weak self] result in
-            switch result {
-            case .success(let phone):
-                self?.phons = phone
-                let response = Page1Model.GetAPI.Response(success: true, json: phone)
-                self?.presenter.presentPage1(response: response)
-            case .failure(let error):
-                let response = Page1Model.GetAPI.Response(success: false, json: error as! Array<Phone>)
-                self?.presenter.presentPage1(response: response)
-            }
+      worker.getAPI { [weak self] result in
+        switch result {
+        case .success(let phone):
+          self?.phons = phone
+          let response = Page1Model.GetAPI.Response(success: true, json: phone)
+          self?.presenter.presentPage1(response: response)
+        case .failure(let error):
+          let response = Page1Model.GetAPI.Response(success: false, json: error as! Array<Phone>)
+          self?.presenter.presentPage1(response: response)
         }
+      }
     }
     
     func selectedPhone(request: Page1Model.Selected.Request) {
-        let index = request.indexPath
-        let selectedPhone : Phone = phons[index]
-        self.selectedPhone = selectedPhone
+        let selectedPhone : Phone = phons[request.indexPath]
+        self.selectedPhones = selectedPhone
         presenter.passSelected()
     }
     

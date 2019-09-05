@@ -1,0 +1,29 @@
+{
+  "id1": {
+    "rating": 4.6,
+    "id": 1,
+    "thumbImageURL": "testURL1",
+    "price": 179.99,
+    "brand": "Moto",
+    "name": "Moto E4 Plus",
+    "description": "First place"
+  },
+  "id2": {
+    "rating": 4.7,
+    "id": 2,
+    "thumbImageURL": "testURL2",
+    "price": 199.99,
+    "brand": "Nokia",
+    "name": "Nokia E4 Plus",
+    "description": "Two place"
+  },
+  "id3": {
+    "rating": 3.8,
+    "id": 3,
+    "thumbImageURL": "testURL3",
+    "price": 179.99,
+    "brand": "Moto",
+    "name": "Moto G5",
+    "description": "Three place"
+  }
+}

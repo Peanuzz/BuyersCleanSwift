@@ -28,8 +28,8 @@ class Page1ListRouter: Page1RouterDetails{
     func passDataToPage2Details(segue: UIStoryboardSegue){
         if segue.identifier == "showDetails" {
             let destinationVC = segue.destination as? Page2DetailsViewController
-            let selectedPhone = viewController.interactor.selectedPhone
-            destinationVC?.interactor.phone = selectedPhone
+            let selectedPhones = viewController.interactor.selectedPhones
+            destinationVC?.interactor.phone = selectedPhones
         }
     }
 }

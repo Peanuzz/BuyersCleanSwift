@@ -14,7 +14,7 @@ import UIKit
 
 protocol Page2DetailsInteractorInterface
 {
-    func feedAPI(request:Page2Model.GetAPIImage.Request)
+    func feedAPIImage(request:Page2Model.GetAPIImage.Request)
     func showDetails(request: Page2Model.showDetails.Request)
     var phone: Phone? {get set}
 
@@ -25,7 +25,7 @@ class Page2DetailsInteractor: Page2DetailsInteractorInterface
     var phone: Phone?
     var imagePhone: [ImagePhone] = []
     var presenter: Page2DetailsPresenterInterface?
-    var worker: APIManagerImage?
+    var worker: Page2WokerAPI = Page2WokerAPI()
   
   // MARK: Do something
   
@@ -34,17 +34,17 @@ class Page2DetailsInteractor: Page2DetailsInteractorInterface
     presenter?.presentDeatails(response: response)
   }
     
-    func feedAPI(request:Page2Model.GetAPIImage.Request){
-        APIManagerImage.shared.getImageAPI(id: request.id) { [weak self] result in
-            switch result {
-            case .success(let imgPhone):
-                self?.imagePhone = imgPhone
-                let response = Page2Model.GetAPIImage.Response(success: true, json: imgPhone)
-                self?.presenter?.presentImage(response: response)
-            case .failure(let error):
-                let response = Page2Model.GetAPIImage.Response(success: false, json: error as! Array<ImagePhone>)
-                self?.presenter?.presentImage(response: response)
-            }
+    func feedAPIImage(request:Page2Model.GetAPIImage.Request){
+      worker.getImageAPI(id: request.id) { [weak self] result in
+        switch result {
+        case .success(let imgPhone):
+          self?.imagePhone = imgPhone
+          let response = Page2Model.GetAPIImage.Response(success: true, json: imgPhone)
+          self?.presenter?.presentImage(response: response)
+        case .failure(let error):
+          let response = Page2Model.GetAPIImage.Response(success: false, json: error as! Array<ImagePhone>)
+          self?.presenter?.presentImage(response: response)
         }
+      }
     }
 }

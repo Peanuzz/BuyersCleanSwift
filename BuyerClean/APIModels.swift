@@ -10,7 +10,7 @@ import Foundation
 
 typealias Model = [Phone]
 
-struct Phone: Codable {
+struct Phone: Codable, Equatable{
     let rating: Double
     let id: Int
     let thumbImageURL: String
@@ -20,7 +20,7 @@ struct Phone: Codable {
 
 typealias ModelImage = [ImagePhone]
 
-struct ImagePhone: Codable {
+struct ImagePhone: Codable, Equatable {
     let url: String
     let id, mobileID: Int
     
@@ -30,14 +30,10 @@ struct ImagePhone: Codable {
     }
 }
 
-struct DisplayedPhone {
+struct DisplayedPhone: Equatable {
     let id: Int
     let rating: Double
     let thumbImageURL: String
     let price: Double
     let name, description: String
-}
-
-struct DisplayedImage {
-    let url: String
 }

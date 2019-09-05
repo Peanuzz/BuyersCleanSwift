@@ -14,13 +14,11 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-protocol APIManagerProtocol {
+protocol Page1WokerAPIManager {
     func getAPI(completion: @escaping (Swift.Result<[Phone], Error>) -> Void)
 }
 
-class APIManager : APIManagerProtocol{
-    static let shared: APIManager = APIManager()
-
+class Page1WokerAPI : Page1WokerAPIManager{
   func getAPI(completion: @escaping (Swift.Result<[Phone], Error>) -> Void)
   {
     let baseURL: String = "https://scb-test-mobile.herokuapp.com/api/mobiles/"

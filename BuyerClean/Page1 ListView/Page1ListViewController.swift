@@ -47,6 +47,8 @@ class Page1ListViewController: UIViewController, Page1ListViewControllerInterfac
     
     let interactor = Page1ListInteractor()
     interactor.presenter = presenter
+    
+    interactor.worker = Page1WokerAPI()
 
     viewController.interactor = interactor
     viewController.router = router
@@ -89,7 +91,7 @@ class Page1ListViewController: UIViewController, Page1ListViewControllerInterfac
         let alert = UIAlertController(title: "Sort",
                                       message: "",
                                       preferredStyle: .alert)
-         let sortLowtoHight = UIAlertAction(title: "Price low to Hight", style: .default) { (action) -> Void in
+        let sortLowtoHight = UIAlertAction(title: "Price low to Hight", style: .default) { (action) -> Void in
             self.sort(Page1Model.Sort.Request.sortCase.lowToHight)
         }
         let sortHighttoLow = UIAlertAction(title: "Price hight to low", style: .default) { (action) -> Void in
